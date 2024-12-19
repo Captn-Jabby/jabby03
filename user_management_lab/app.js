@@ -1,20 +1,21 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const userRoutes = require('routes/userRoutes');
-
-
 const app = express();
 
-// Middleware
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(express.static('public'));
-
-// View Engine
+// Set the view engine to EJS
 app.set('view engine', 'ejs');
 
-// Routes
-app.use('/', userRoutes);
+// Middleware for parsing form data
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-// Start server
-app.listen(3000, () => console.log('Server running on http://localhost:3000'));
+// Static files
+app.use(express.static('public'));
+
+// Routes
+app.use('/', require('./routes/userRoutes'));  // Mounting the userRoutes
+
+// Server setup
+app.listen(3000, () => {
+    console.log('Server running on http://localhost:3000');
+});
