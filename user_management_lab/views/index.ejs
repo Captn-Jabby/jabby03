@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Management</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h1>User Management</h1>
+    <a href="/insert-user">Add New User</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fullname</th>
+                <th>Gender</th>
+                <th>Bdate</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% users.forEach(user => { %>
+            <tr>
+                <td><%= user.id %></td>
+                <td><%= user.fullname %></td>
+                <td><%= user.gender %></td>
+                <td><%= user.bdate.toISOString().slice(0, 10) %></td>
+                <td>
+                    <button onclick="editUser('<%= user.id %>')">Edit</button>
+                    <button onclick="deleteUser('<%= user.id %>')">Delete</button>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <script>
+        async function deleteUser(id) {
+            if (confirm('Are you sure?')) {
+                await axios.delete(`/delete-user/${id}`);
+                location.reload();
+            }
+        }
+
+        async function editUser(id) {
+            const newName = prompt('Enter new fullname:');
+            const newGender = prompt('Enter new gender (Male/Female):');
+            const newBdate = prompt('Enter new birthdate (YYYY-MM-DD):');
+
+            if (newName && newGender && newBdate) {
+                await axios.put(`/edit-user/${id}`, {
+                    fullname: newName,
+                    gender: newGender,
+                    bdate: newBdate
+                });
+                location.reload();
+            }
+        }
+    </script>
+</body>
+</html>
