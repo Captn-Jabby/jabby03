@@ -45,7 +45,6 @@ exports.getEditUserPage = (req, res) => {
 
 
 
-// userController.js
 exports.updateUser = (req, res) => {
     const { id } = req.params;
     const { fullname, gender, bdate } = req.body;
@@ -54,12 +53,14 @@ exports.updateUser = (req, res) => {
     db.query(query, [fullname, gender, bdate, id], (err) => {
         if (err) {
             console.error(err);
-            return res.status(500).send('Error updating user');
+            return res.status(500).json({ error: 'Error updating user' });
         }
 
-        res.redirect('/');  // Redirecting to the home page after successful update
+        // Send success response
+        res.json({ success: true, message: 'User updated successfully' });
     });
 };
+
 
 
 exports.deleteUser = (req, res) => {

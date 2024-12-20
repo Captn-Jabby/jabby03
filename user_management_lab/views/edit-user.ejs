@@ -38,13 +38,19 @@
       const fullname = document.getElementById('fullname').value;
       const gender = document.querySelector('input[name="gender"]:checked').value;
       const bdate = document.getElementById('bdate').value;
-
+  
       axios.put(`/edit-user/${id}`, { fullname, gender, bdate })
-        .then(() => {
-          window.location.href = '/';  // Redirect to the home page after successful update
-        })
-        .catch(err => console.error(err));
-    }
+          .then((response) => {
+              if (response.data.success) {
+                  window.location.href = '/';  // Redirect to the home page after successful update
+              }
+          })
+          .catch(err => {
+              console.error('Error updating user:', err);
+              alert('Failed to update user. Please try again.');
+          });
+  }
+  
   </script>
 </body>
 </html>
