@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title></title>
+</head>
+<body>
+    <br><br><br>
+    <center>
+        <h1>Index</h1>
+        <button type="button" onclick="display()">Here</button><br><br>
+            <table>
+                <thead>
+                    <th>ID</th>
+                    <th>Full Name</th>
+                    <th>Gender</th>
+                    <th>Birthday</th>
+                    <th>Actions</th>
+                </thead>
+                <tbody>
+                    <% users.forEach(user => { %>
+                        <tr>
+                            <td><%= user.id %></td>
+                            <td><%= user.fullname %></td>
+                            <td><%= user.gender %></td>
+                            <td><%= user.bdate %></td>
+    <td>
+    <a href="/edit/<%= user.id %>">Edit</a> | <a href="/delete/<%= user.id %>">Delete</a>
+    </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+            <a href="/addPage">Add User</a>
+    </center>
+</body>
+</html>
+
+<script src="/js/main.js"></script>
+
+<style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+  </style>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Add Users</title>
+</head>
+<body>
+    <form action="/addUser" method="POST">
+        <label for="fullname">Full Name:</label>
+        <input type="text" id="fullname" name="fullname" required>
+        <br>
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="gender">Male</label>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="gender">Female</label><br>
+
+        <label for="bdate">Birthdate</label>
+        <input type="date" name="bdate" id="bdate">
+
+        <br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
